@@ -35,7 +35,7 @@ vector<string> generate_word_ladder(
       }
     }
   }
-  error(begin_word, end_word,"No word ladder found!!");
+  cout << "Word ladder found: ";
   return {};  
 }
 
@@ -55,11 +55,10 @@ bool edit_distance_within(const string& str1, const string& str2, int total) {
   int tot = total;
   int len1 = str1.length(), len2 = str2.length();
 
-  // if strs differ by more than 1 character
-  // or are equal. 
-  // they cant be within one edit
+  // if strs differ by more than 'total' character
+
   if (abs(len1 - len2) > total) return false;
-  if (str1 == str2) return false;
+  if (str1 == str2) return true;
 
   int i = 0, j = 0, numEdits = 0;
 
@@ -105,7 +104,6 @@ void load_words(set<string> & word_list, const string& file_name)
 
 void print_word_ladder(const vector<string>& ladder){
   
-  cout << "Word ladder found: ";
   for (const auto &word : ladder)
     cout << word << " ";
   cout << endl;
