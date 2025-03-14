@@ -18,7 +18,7 @@
 
 // returns true if strings within one edit distance
 // adapted from the Levenshtein algorithm
-bool edit_distance_is_one(const std::string& str1, const std::string& str2) {
+bool is_adjacent(const std::string& str1, const std::string& str2) {
   int len1 = str1.length(), len2 = str2.length();
   int numEdits = 0;
 
