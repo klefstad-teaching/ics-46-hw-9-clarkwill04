@@ -44,20 +44,24 @@ bool not_in_set(string const &word, set<string> set)
   return set.find(word) == set.end(); 
 }
 
-
+bool is_adjacent(const string& str1, const string& str2)
+{
+  return edit_distance_within(str1, str2, 1);
+}
 // returns true if strings within one edit distance
 // adapted from the Levenshtein algorithm
-bool is_adjacent(const std::string& str1, const std::string& str2) {
+bool edit_distance_within(const string& str1, const string& str2, int total) {
+
+  int tot = total;
   int len1 = str1.length(), len2 = str2.length();
-  int numEdits = 0;
 
   // if strs differ by more than 1 character
   // or are equal. 
   // they cant be within one edit
-  if (abs(len1 - len2) > 1) return false;
+  if (abs(len1 - len2) > total) return false;
   if (str1 == str2) return false;
 
-  int i = 0, j = 0;
+  int i = 0, j = 0, numEdits = 0;
 
   while (i < len1 && j < len2)
   {
@@ -65,7 +69,7 @@ bool is_adjacent(const std::string& str1, const std::string& str2) {
     if (str1[i] != str2[j])
     {
       // more than one edit --> this one will make it 2
-      if (numEdits == 1) return false;
+      if (numEdits > total) return false;
 
       // ensures that every index is checked
       // by incrementing the greater len strings idx
@@ -87,7 +91,7 @@ bool is_adjacent(const std::string& str1, const std::string& str2) {
   if (i < len1 || j < len2 )
     ++numEdits;
 
-  return (numEdits == 1);
+  return (numEdits <= tot);
 
 }
 
