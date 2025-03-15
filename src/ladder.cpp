@@ -5,7 +5,7 @@ vector<string> generate_word_ladder(
   const string& begin_word, const string& end_word, const set<string>& word_list)
 {
   if (not_in_set(end_word, word_list)) return {};
-
+  if (begin_word == end_word) return {};
   queue<vector<string>> ladder_queue;
   ladder_queue.push({begin_word});
 
@@ -29,14 +29,22 @@ vector<string> generate_word_ladder(
           vector<string> new_ladder = ladder;
           new_ladder.push_back(word);
           if (word == end_word)
+            {
+            found_ladder();
             return new_ladder;
+            }
           ladder_queue.push(new_ladder);
         }
       }
     }
   }
-  cout << "Word ladder found: ";
+  cout << "No word ladder found.";
   return {};  
+}
+
+void found_ladder()
+{
+  cout << "Word ladder found: ";
 }
 
 bool not_in_set(string const &word, set<string> set) 
