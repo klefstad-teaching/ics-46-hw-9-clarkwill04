@@ -47,7 +47,7 @@ void found_ladder()
   cout << "Word ladder found: ";
 }
 
-bool not_in_set(string const &word, set<string> set) 
+bool not_in_set(const string &word, const set<string> &set) 
 {
   return set.find(word) == set.end(); 
 }
