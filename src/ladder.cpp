@@ -29,23 +29,15 @@ vector<string> generate_word_ladder(
           vector<string> new_ladder = ladder;
           new_ladder.push_back(word);
           if (word == end_word)
-            {
-            found_ladder();
             return new_ladder;
-            }
           ladder_queue.push(new_ladder);
         }
       }
     }
   }
-  cout << "No word ladder found.";
   return {};  
 }
 
-void found_ladder()
-{
-  cout << "Word ladder found: ";
-}
 
 bool not_in_set(const string &word, const set<string> &set) 
 {
@@ -110,10 +102,25 @@ void load_words(set<string> & word_list, const string& file_name)
   while (file >> word) word_list.insert(word);
 }
 
+void print_found_ladder()
+{
+  cout << "Word ladder found: ";
+}
+void print_not_found_ladder()
+{
+  cout << "No word ladder found.";
+}
 void print_word_ladder(const vector<string>& ladder){
+
+  if (ladder.empty())
+    print_not_found_ladder();
+  else
+    {
+      print_found_ladder();
+      for (const auto &word : ladder)
+      cout << word << " ";
+    }
   
-  for (const auto &word : ladder)
-    cout << word << " ";
   cout << endl;
 }
 
